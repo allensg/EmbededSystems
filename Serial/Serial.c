@@ -11,11 +11,9 @@ void serial_open(long speed, int config);
 char serial_read();
 void serial_write(char c);
 
-int main(void)
-{
+int main(void){
 	serial_open(9600, 0);
-    while(1)
-    {
+    while(1) {
         serial_write(serial_read());
    }
 }

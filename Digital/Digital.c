@@ -92,8 +92,7 @@ int state;
 #include <avr/io.h>
 #include <util/delay.h>
 
-int main(void)
-{
+int main(void){
 	int lights[NUM_LIGHTS]={13,12,11,10};
 	int buttons[NUM_BUTTONS]={9,8};
 	state = 0;
@@ -102,8 +101,7 @@ int main(void)
 	while(1){
 		while(!state){
 			//if(buttonCapture(buttons)==9)state=STATE_FLASH;
-			switch(buttonCapture(buttons))
-			{
+			switch(buttonCapture(buttons)){
 				case 9:
 					state=STATE_FLASH;
 					break;
@@ -116,8 +114,7 @@ int main(void)
 		}
 		while(state==STATE_FLASH){
 			flash(lights,buttons);
-			switch(buttonCapture(buttons))
-			{
+			switch(buttonCapture(buttons)){
 				case 9:
 					state=STATE_OFF;
 					break;
@@ -130,8 +127,7 @@ int main(void)
 		}
 		while(state==STATE_ROTATE){
 			rotate(lights);
-			switch(buttonCapture(buttons))
-			{
+			switch(buttonCapture(buttons)){
 				case 9:
 					state=STATE_FLASH;
 					break;
@@ -191,13 +187,11 @@ void digitalWrite(int pNo, int value){
 void flash(int lights[],int buttons[]){
 	int i;
 	allOff(lights);
-	for(i=0;i<NUM_LIGHTS;i++){
+	for(i=0;i<NUM_LIGHTS;i++)
 		digitalWrite(lights[i],HIGH);
-	}
 	_delay_ms(500);
-	for(i=0;i<NUM_LIGHTS;i++){
+	for(i=0;i<NUM_LIGHTS;i++)
 		digitalWrite(lights[i],LOW);
-	}
 	_delay_ms(500);
 }
 
@@ -212,16 +206,17 @@ void rotate(int lights[]){
 }
 
 void allOff(int lights[]){
-	for(int i=0;i<NUM_LIGHTS;i++){
+	for(int i=0;i<NUM_LIGHTS;i++)
 		digitalWrite(lights[i],LOW);
-	}
+	
 }
 
 int buttonCapture(int buttons[]){
-	for(int i=0;i<NUM_BUTTONS;i++)
+	for(int i=0;i<NUM_BUTTONS;i++){
 		if(digitalRead(buttons[i])==LOW){
 			while(digitalRead(buttons[i])==LOW){}
 			return buttons[i];
 		}
+	}
 	return 0;
 }

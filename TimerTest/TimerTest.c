@@ -164,18 +164,18 @@ int pinMode(int pNo, int type){
 
 	switch(type){
 		case 0x0:
-		address[1] &= (~mask);
-		address[2] &= (~mask);
-		break;
+			address[1] &= (~mask);
+			address[2] &= (~mask);
+			break;
 		case 0x1:
-		address[1] |= mask;
-		break;
+			address[1] |= mask;
+			break;
 		case 0x2:
-		address[1] &= (~mask);
-		address[2] |= mask;
-		break;
+			address[1] &= (~mask);
+			address[2] |= mask;
+			break;
 		default:
-		break;
+			break;
 	}
 	return 0;
 }
@@ -192,7 +192,7 @@ void digitalWrite(int pNo, int value){
 	volatile uint8_t * address = (volatile uint8_t *) n.addr;
 	int mask = (1<<n.bit);
 	if(value == HIGH)
-	address[2] |= mask;
+		address[2] |= mask;
 	else if(value == LOW)
-	address[2] &= ~mask;
+		address[2] &= ~mask;
 }

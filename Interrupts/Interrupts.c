@@ -97,8 +97,7 @@ int main(void){
 	PCMSK0 |= (1<<PCINT0); //Enable PC Mask 0
 	sei();
 	
-while(1)
-    {
+	while(1){
         if(interrupt_count){
 	        count = 50;
 	        while(count) {
@@ -120,9 +119,9 @@ void parseInterruptCount(int count){
 		count/=10;
 		i++;
 	}
-	for(int j=0;j<20;j++){
+	for(int j=0;j<20;j++)
 		serial_write(digits[i]+0x30);
-	}
+
 	serial_write('\n');
 }
 
@@ -188,7 +187,7 @@ void digitalWrite(int pNo, int value){
 	volatile uint8_t * address = (volatile uint8_t *) n.addr;
 	int mask = (1<<n.bit);
 	if(value == HIGH)
-	address[2] |= mask;
+		address[2] |= mask;
 	else if(value == LOW)
-	address[2] &= ~mask;
+		address[2] &= ~mask;
 }

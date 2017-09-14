@@ -18,16 +18,13 @@ void serial_print(char *str);
 volatile uint8_t transmit_ISR = 1;
 static char *pData;
 
-int main(void)
-{
+int main(void){
 	sei();
 	serial_open(19200, 0);
 	char *msg = "Hello, World!\n";
-    while(1)
-    {
+    while(1) {
         serial_print(msg);
 		_delay_ms(1000);
-		
     }
 }
 
@@ -61,8 +58,7 @@ ISR (USART0_UDRE_vect){
 	if(*pData == 0){
 		transmit_ISR = 1;
 		UCSR0B &= ~(1<<UDRIE0);
-	}
-	else{
+	} else{
 		transmit_ISR=0;
 		UDR0=*pData;
 		*pData++;

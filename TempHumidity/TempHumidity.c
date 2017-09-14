@@ -173,18 +173,18 @@ int pinMode(int pNo, int type){
 
 	switch(type){
 		case 0x0:
-		address[1] &= (~mask);
-		address[2] &= (~mask);
-		break;
+			address[1] &= (~mask);
+			address[2] &= (~mask);
+			break;
 		case 0x1:
-		address[1] |= mask;
-		break;
+			address[1] |= mask;
+			break;
 		case 0x2:
-		address[1] &= (~mask);
-		address[2] |= mask;
-		break;
+			address[1] &= (~mask);
+			address[2] |= mask;
+			break;
 		default:
-		break;
+			break;
 	}
 	return 0;
 }
@@ -200,10 +200,10 @@ void digitalWrite(int pNo, int value){
 	struct pinMap n = map[pNo];
 	volatile uint8_t * address = (volatile uint8_t *) n.addr;
 	int mask = (1<<n.bit);
-	if(value == HIGH)
-	address[2] |= mask;
-	else if(value == LOW)
-	address[2] &= ~mask;
+	if(value == HIGH) 
+		address[2] |= mask;
+	else if(value == LOW) 
+		address[2] &= ~mask;
 }
 
 void serial_open(long speed, int config){
@@ -236,8 +236,7 @@ ISR (USART0_UDRE_vect){
 	if(*pData == 0){
 		transmit_ISR = 1;
 		UCSR0B &= ~(1<<UDRIE0);
-	}
-	else{
+	} else{
 		transmit_ISR=0;
 		UDR0=*pData;
 		*pData++;

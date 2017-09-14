@@ -1,4 +1,5 @@
 /*
+ * ADC.c
  *
  * Created: 4/27/2015 6:42:09 PM
  *  Author: Spencer Allen, Blake Carpenter, Jonathan Tye
@@ -76,8 +77,7 @@ ISR(TIMER0_COMPA_vect){
 	/*if(timesPolled >= 5){
 		ADCSRA &= ~(1<<ADEN);
 		ADC_print(total);
-	}
-	else{
+	} else{
 		OCR0A += 60000;
 		ADCSRA |= (1<<ADEN);
 		ADCSRA |= (1<<ADSC);
@@ -94,8 +94,7 @@ ISR(ADC_vect){
 	if(timesPolled == 5){
 		ADC_print(total);
 		timesPolled = 0;
-	}
-	else{
+	} else{
 		int temp = 0;
 		uint8_t low = ADCL;
 		uint16_t hi = ADCH;

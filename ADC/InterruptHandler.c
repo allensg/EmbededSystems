@@ -45,8 +45,7 @@ ISR (USART0_UDRE_vect){
 	if(*pData == 0){
 		transmit_ISR = 1;
 		UCSR0B &= ~(1<<UDRIE0);
-	}
-	else{
+	} else{
 		transmit_ISR=0;
 		UDR0=*pData;
 		*pData++;

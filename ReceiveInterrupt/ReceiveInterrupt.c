@@ -24,17 +24,13 @@ char serial_read();
 void serial_write(char c);
 void serial_print(char *str);
 
-int main(void)
-{
+int main(void){
 	sei();
 	serial_open(19200, 0);
-    while(1)
-    {
+    while(1) {
 		serial_gets(receive, 0);
 		serial_print(receive);
 		loop_until_bit_is_set(UCSR0B, UDRIE0);
-		
-		
     }
 }
 
@@ -51,15 +47,13 @@ ISR(USART0_RX_vect){
 	if(numCharRec >= RECEIVE_LENGTH-1){
 		*receivePointer = 0;
 		UCSR0B&=~(1<<RXCIE0);
-	}
-	else{
+	} else{
 		*receivePointer = UDR0;
 		if(*receivePointer=='\n'){
 			receivePointer++;
 			*receivePointer=0;
 			UCSR0B&=~(1<<RXCIE0);
-		}
-		else{
+		} else{
 			receivePointer++;
 			numCharRec++;
 		}
@@ -102,8 +96,7 @@ ISR (USART0_UDRE_vect){
 	if(*pData == 0){
 		transmit_ISR = 1;
 		UCSR0B &= ~(1<<UDRIE0);
-	}
-	else{
+	} else{
 		transmit_ISR=0;
 		UDR0=*pData;
 		*pData++;
